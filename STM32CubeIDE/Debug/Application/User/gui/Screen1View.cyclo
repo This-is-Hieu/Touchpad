@@ -1,14 +1,23 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:104:18:virtual void touchgfx::Screen::afterTransition()	1
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:144:18:virtual void touchgfx::Screen::handleTickEvent()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	1
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:14:6:virtual void Screen1View::tearDownScreen()	1
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:18:6:virtual void Screen1View::leftMouse()	2
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:25:6:virtual void Screen1View::rightMouse()	2
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:32:6:virtual void Screen1View::moveRight()	2
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:39:6:virtual void Screen1View::moveLeft()	2
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:46:6:virtual void Screen1View::moveUp()	2
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:53:6:virtual void Screen1View::moveDown()	2
-../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:11:13:Screen1View::~Screen1View()	1
-../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:11:13:virtual Screen1View::~Screen1View()	1
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:5:1:Screen1View::Screen1View()	1
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:9:6:virtual void Screen1View::setupScreen()	1
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:40:6:virtual void Screen1View::tearDownScreen()	1
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:44:6:virtual void Screen1View::leftMouse()	2
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:53:6:virtual void Screen1View::rightMouse()	2
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:62:6:virtual void Screen1View::moveRight()	2
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:71:6:virtual void Screen1View::moveLeft()	2
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:80:6:virtual void Screen1View::moveUp()	2
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:89:6:virtual void Screen1View::moveDown()	2
+../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:28:13:Screen1View::~Screen1View()	1
+../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:28:13:virtual Screen1View::~Screen1View()	1
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:23:1:Screen1View::Screen1View()	1
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:176:6:void Screen1View::addTouchEffect(int16_t, int16_t)	3
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:195:6:void Screen1View::updateTouchEffects()	4
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:225:6:void Screen1View::sendMousePosition(int16_t, int16_t)	1
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:248:6:void Screen1View::sendMouseClick(bool)	1
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:277:6:void Screen1View::drawSimpleTouchEffect(uint8_t, const touchgfx::Rect&)	1
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:298:6:void Screen1View::calculateMouseMovementFromCenter(int16_t, int16_t, int16_t&, int16_t&)	4
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:99:6:virtual void Screen1View::handleClickEvent(const touchgfx::ClickEvent&)	4
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:135:6:virtual void Screen1View::handleDragEvent(const touchgfx::DragEvent&)	2
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:32:6:virtual void Screen1View::setupScreen()	1
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:153:6:virtual void Screen1View::handleTickEvent()	3
+C:/TaiLieuCuaChien/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:262:6:virtual void Screen1View::draw(touchgfx::Rect&)	1

@@ -1,5 +1,5 @@
 Drivers/CMSIS/system_stm32f4xx.o: \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/Core/Src/system_stm32f4xx.c \
+ C:/TaiLieuCuaChien/Touchpad/Core/Src/system_stm32f4xx.c \
  ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h \
  ../../Drivers/CMSIS/Include/core_cm4.h \
