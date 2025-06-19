@@ -1,5 +1,5 @@
 Application/User/gui/Screen1View.o: \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/TouchGFX/gui/src/screen1_screen/Screen1View.cpp \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp \
  ../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \

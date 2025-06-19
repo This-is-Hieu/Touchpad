@@ -1,5 +1,5 @@
 Middlewares/USB_Device_Library/usbd_hid.o: \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.c \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.c \
  ../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \

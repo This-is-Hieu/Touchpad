@@ -8,9 +8,9 @@
             "Type": "FlexButton",
             "Name": "LeftMouse",
             "X": 190,
-            "Y": 270,
+            "Y": 160,
             "Width": 50,
-            "Height": 50,
+            "Height": 160,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
             },
@@ -18,7 +18,7 @@
               {
                 "Type": "BoxWithBorderButtonStyle",
                 "Width": 50,
-                "Height": 50,
+                "Height": 160,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
                 "ColorReleased": {
@@ -46,7 +46,7 @@
             "Name": "RightMouse",
             "X": 190,
             "Width": 50,
-            "Height": 50,
+            "Height": 160,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
             },
@@ -54,7 +54,7 @@
               {
                 "Type": "BoxWithBorderButtonStyle",
                 "Width": 50,
-                "Height": 50,
+                "Height": 160,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
                 "ColorReleased": {
@@ -78,151 +78,13 @@
             ]
           },
           {
-            "Type": "FlexButton",
-            "Name": "right",
-            "X": 64,
-            "Y": 62,
-            "Width": 50,
-            "Height": 50,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "left",
-            "X": 64,
-            "Y": 191,
-            "Width": 50,
-            "Height": 50,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "up",
-            "Y": 128,
-            "Width": 50,
-            "Height": 50,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "down",
-            "X": 128,
-            "Y": 128,
-            "Width": 50,
-            "Height": 50,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "Width": 12,
+            "Height": 74,
+            "TextId": "__SingleUse_A1IV",
+            "TextRotation": "270",
+            "AutoSize": true
           }
         ],
         "Interactions": [
@@ -246,50 +108,6 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "rightMouse"
-            }
-          },
-          {
-            "InteractionName": "Interaction3",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "right"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "moveRight"
-            }
-          },
-          {
-            "InteractionName": "Interaction4",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "left"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "moveLeft"
-            }
-          },
-          {
-            "InteractionName": "Interaction5",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "up"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "moveUp"
-            }
-          },
-          {
-            "InteractionName": "Interaction6",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "down"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "moveDown"
             }
           }
         ]

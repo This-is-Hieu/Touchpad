@@ -1,6 +1,6 @@
 Application/User/USB_DEVICE/App/usb_device.o: \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/USB_DEVICE/App/usb_device.c \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/USB_DEVICE/App/usb_device.h \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usb_device.c \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usb_device.h \
  ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h \
  ../../Drivers/CMSIS/Include/core_cm4.h \
@@ -47,10 +47,10 @@ Application/User/USB_DEVICE/App/usb_device.o: \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/USB_DEVICE/App/usbd_desc.h \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usbd_desc.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/USB_DEVICE/App/usb_device.h:
+D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usb_device.h:
 ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h:
 ../../Drivers/CMSIS/Include/core_cm4.h:
@@ -98,6 +98,6 @@ D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/USB_DEVICE/App/usb_device.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
-D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/USB_DEVICE/App/usbd_desc.h:
+D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usbd_desc.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:

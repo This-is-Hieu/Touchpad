@@ -39,6 +39,7 @@ typedef struct {
 	int8_t wheel;
 } mouseHID;
 mouseHID mousehid = {0,0,0,0};
+mouseHID prev_mousehid;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -1037,23 +1038,8 @@ void StartTask03(void *argument)
           USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
           break;
 
-        case 'W': // Move Up
+        case 'T': // Touch
           mousehid.mouse_y = -5;
-          USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          break;
-
-        case 'S': // Move Down
-          mousehid.mouse_y = 5;
-          USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          break;
-
-        case 'A': // Move Left
-          mousehid.mouse_x = -5;
-          USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          break;
-
-        case 'D': // Move Right
-          mousehid.mouse_x = 5;
           USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
           break;
 

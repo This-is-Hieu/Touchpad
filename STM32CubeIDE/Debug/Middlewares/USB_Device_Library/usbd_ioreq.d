@@ -1,5 +1,5 @@
 Middlewares/USB_Device_Library/usbd_ioreq.o: \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../../USB_DEVICE/Target/usbd_conf.h ../../Core/Inc/main.h \

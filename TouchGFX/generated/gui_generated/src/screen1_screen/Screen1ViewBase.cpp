@@ -11,47 +11,19 @@ Screen1ViewBase::Screen1ViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    LeftMouse.setBoxWithBorderPosition(0, 0, 50, 50);
+    LeftMouse.setBoxWithBorderPosition(0, 0, 50, 160);
     LeftMouse.setBorderSize(5);
     LeftMouse.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
     LeftMouse.setAction(flexButtonCallback);
-    LeftMouse.setPosition(190, 270, 50, 50);
+    LeftMouse.setPosition(190, 160, 50, 160);
     add(LeftMouse);
 
-    RightMouse.setBoxWithBorderPosition(0, 0, 50, 50);
+    RightMouse.setBoxWithBorderPosition(0, 0, 50, 160);
     RightMouse.setBorderSize(5);
     RightMouse.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
     RightMouse.setAction(flexButtonCallback);
-    RightMouse.setPosition(190, 0, 50, 50);
+    RightMouse.setPosition(190, 0, 50, 160);
     add(RightMouse);
-
-    right.setBoxWithBorderPosition(0, 0, 50, 50);
-    right.setBorderSize(5);
-    right.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    right.setAction(flexButtonCallback);
-    right.setPosition(64, 62, 50, 50);
-    add(right);
-
-    left.setBoxWithBorderPosition(0, 0, 50, 50);
-    left.setBorderSize(5);
-    left.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    left.setAction(flexButtonCallback);
-    left.setPosition(64, 191, 50, 50);
-    add(left);
-
-    up.setBoxWithBorderPosition(0, 0, 50, 50);
-    up.setBorderSize(5);
-    up.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    up.setAction(flexButtonCallback);
-    up.setPosition(0, 128, 50, 50);
-    add(up);
-
-    down.setBoxWithBorderPosition(0, 0, 50, 50);
-    down.setBorderSize(5);
-    down.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    down.setAction(flexButtonCallback);
-    down.setPosition(128, 128, 50, 50);
-    add(down);
 }
 
 Screen1ViewBase::~Screen1ViewBase()
@@ -79,33 +51,5 @@ void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCo
         //When RightMouse clicked call virtual function
         //Call rightMouse
         rightMouse();
-    }
-    if (&src == &right)
-    {
-        //Interaction3
-        //When right clicked call virtual function
-        //Call moveRight
-        moveRight();
-    }
-    if (&src == &left)
-    {
-        //Interaction4
-        //When left clicked call virtual function
-        //Call moveLeft
-        moveLeft();
-    }
-    if (&src == &up)
-    {
-        //Interaction5
-        //When up clicked call virtual function
-        //Call moveUp
-        moveUp();
-    }
-    if (&src == &down)
-    {
-        //Interaction6
-        //When down clicked call virtual function
-        //Call moveDown
-        moveDown();
     }
 }

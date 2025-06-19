@@ -1,5 +1,5 @@
 Application/User/freertos.o: \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/Core/Src/freertos.c \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/Core/Src/freertos.c \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../../Core/Inc/FreeRTOSConfig.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \

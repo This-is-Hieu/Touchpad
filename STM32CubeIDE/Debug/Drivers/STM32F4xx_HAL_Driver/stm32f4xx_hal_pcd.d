@@ -1,5 +1,5 @@
 Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pcd.o: \
- D:/BK/20242/Nhúng/TouchGFX/MyApplication_1/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../../Core/Inc/stm32f4xx_hal_conf.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \

@@ -1,5 +1,6 @@
 #include <gui/screen1_screen/Screen1View.hpp>
 #include "cmsis_os.h"
+#include "stdio.h"
 extern osMessageQueueId_t myQueue01Handle;
 
 Screen1View::Screen1View()
@@ -29,32 +30,16 @@ void Screen1View::rightMouse() {
     }
 }
 
-void Screen1View::moveRight() {
-    uint8_t move = 'D';
-    if (osMessageQueueGetCount(myQueue01Handle) < 5) {
-        osMessageQueuePut(myQueue01Handle, &move, 0, 10);
+void Screen1View::handleClickEvent(const ClickEvent& evt)
+{
+    if (evt.getType() == ClickEvent::PRESSED)
+    {
+        int x = evt.getX();
+        int y = evt.getY();
+
+
+
+
     }
 }
-
-void Screen1View::moveLeft() {
-    uint8_t move = 'A';
-    if (osMessageQueueGetCount(myQueue01Handle) < 5) {
-        osMessageQueuePut(myQueue01Handle, &move, 0, 10);
-    }
-}
-
-void Screen1View::moveUp() {
-    uint8_t move = 'W';
-    if (osMessageQueueGetCount(myQueue01Handle) < 5) {
-        osMessageQueuePut(myQueue01Handle, &move, 0, 10);
-    }
-}
-
-void Screen1View::moveDown() {
-    uint8_t move = 'S';
-    if (osMessageQueueGetCount(myQueue01Handle) < 5) {
-        osMessageQueuePut(myQueue01Handle, &move, 0, 10);
-    }
-}
-
 

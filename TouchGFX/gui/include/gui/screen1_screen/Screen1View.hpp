@@ -13,10 +13,7 @@ public:
     virtual void tearDownScreen();
     virtual void leftMouse();
     virtual void rightMouse();
-    virtual void moveUp();
-    virtual void moveDown();
-    virtual void moveRight();
-    virtual void moveLeft();
+    virtual void handleClickEvent(const ClickEvent& evt);
 protected:
     int16_t touchStartX = -1;
     int16_t touchStartY = -1;

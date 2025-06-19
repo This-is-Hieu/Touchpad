@@ -28,22 +28,6 @@ public:
     {
         // Override and implement this function in Screen1
     }
-    virtual void moveRight()
-    {
-        // Override and implement this function in Screen1
-    }
-    virtual void moveLeft()
-    {
-        // Override and implement this function in Screen1
-    }
-    virtual void moveUp()
-    {
-        // Override and implement this function in Screen1
-    }
-    virtual void moveDown()
-    {
-        // Override and implement this function in Screen1
-    }
 
 protected:
     FrontendApplication& application() {
@@ -56,10 +40,6 @@ protected:
     touchgfx::Box __background;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  LeftMouse;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  RightMouse;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  right;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  left;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  up;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  down;
 
 private:
 
