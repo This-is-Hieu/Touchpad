@@ -76,15 +76,6 @@
                 }
               }
             ]
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1",
-            "Width": 12,
-            "Height": 74,
-            "TextId": "__SingleUse_A1IV",
-            "TextRotation": "270",
-            "AutoSize": true
           }
         ],
         "Interactions": [
