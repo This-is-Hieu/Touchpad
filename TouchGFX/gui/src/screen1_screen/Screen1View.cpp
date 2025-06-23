@@ -10,8 +10,8 @@
 
 #include <touchgfx/widgets/canvas/AbstractPainterARGB8888.hpp>
 
-//float scale_x = 1080.0f / 240.0f;
-//float scale_y = 1920.0f / 320.0f;
+// float scale_x = 1080.0f / 240.0f;
+// float scale_y = 1920.0f / 320.0f;
 extern USBD_HandleTypeDef hUsbDeviceHS;
 
 // Mouse HID report structure
@@ -25,11 +25,11 @@ typedef struct
 
 Screen1View::Screen1View()
 {
-//    // Initialize touch effects
-//    for (uint8_t i = 0; i < MAX_TOUCH_EFFECTS; i++)
-//    {
-//        touchEffects[i].active = false;
-//    }
+    //    // Initialize touch effects
+    //    for (uint8_t i = 0; i < MAX_TOUCH_EFFECTS; i++)
+    //    {
+    //        touchEffects[i].active = false;
+    //    }
 }
 
 void Screen1View::setupScreen()
@@ -45,8 +45,6 @@ void Screen1View::tearDownScreen()
     Screen1ViewBase::tearDownScreen();
 }
 
-
-
 void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
 {
     if (evt.getType() == touchgfx::ClickEvent::PRESSED)
@@ -58,32 +56,29 @@ void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
         circle1.setVisible(true);
         circle1.invalidate();
         shrinkStartTick = HAL_GetTick();
-        shrinking = true;  // Bắt đầu thu nhỏ trong tick
+        shrinking = true; // Bắt đầu thu nhỏ trong tick
     }
     else if (evt.getType() == touchgfx::ClickEvent::RELEASED)
     {
 
+        //        if (!dragging)
+        //        {
+        //            sendMouseClick(true);
+        //            HAL_Delay(20);
+        //            sendMouseClick(false);
+        //        }
 
-//        if (!dragging)
-//        {
-//            sendMouseClick(true);
-//            HAL_Delay(20);
-//            sendMouseClick(false);
-//        }
-
-//        dragging = false;
-//        touchStartX = -1;
-//        touchStartY = -1;
+        //        dragging = false;
+        //        touchStartX = -1;
+        //        touchStartY = -1;
     }
 }
 
-
 void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 {
-    // Nếu đây là frame đầu tiên khi bắt đầu kéo
-
     int16_t deltaX = evt.getDeltaX();
     int16_t deltaY = evt.getDeltaY();
+
     shrinkStartTick = HAL_GetTick();
     circle1.setCenter(evt.getNewX(), evt.getNewY());
     currentRadius = 35;
@@ -91,39 +86,44 @@ void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
     circle1.setLineWidth(5);
     circle1.setVisible(true);
     circle1.invalidate();
+    shrinking = true;
 
-    shrinking = true;  // Bắt đầu thu nhỏ trong tick
     if (deltaX != 0 || deltaY != 0)
     {
-        sendMousePosition(deltaX, deltaY);
+        // bool isStraightLineX = (abs(deltaX) > abs(deltaY) * 1.5f) && (deltaX * lastDeltaX >= 0);
+        // bool isStraightLineY = (abs(deltaY) > abs(deltaX) * 1.5f) && (deltaY * lastDeltaY >= 0);
+
+        float adjustedX = deltaX * TOUCHPAD_SENSITIVITY;
+        float adjustedY = deltaY * TOUCHPAD_SENSITIVITY;
+
+        float smoothFactor = 0.2f;
+        ;
+        smoothedDeltaX = smoothedDeltaX * smoothFactor + adjustedX * (1.0f - smoothFactor);
+        smoothedDeltaY = smoothedDeltaY * smoothFactor + adjustedY * (1.0f - smoothFactor);
+
+        sendMousePosition((int16_t)smoothedDeltaX, (int16_t)smoothedDeltaY);
+
+        lastDeltaX = deltaX;
+        lastDeltaY = deltaY;
     }
-
-    // Cập nhật lại tọa độ làm mốc cho frame tiếp theo
-//    touchStartX = evt.getNewX();
-//    touchStartY = evt.getNewY();
-
-
 }
-
-
 
 void Screen1View::handleTickEvent()
 {
     if (shrinking)
     {
-        uint32_t elapsed = HAL_GetTick() - shrinkStartTick;
-        const uint32_t DURATION = 500;
+        unsigned long elapsed = HAL_GetTick() - shrinkStartTick;
+        const unsigned long DURATION = 500;
 
         if (elapsed < DURATION)
         {
-            float progress = (float)elapsed / DURATION;  // Từ 0.0 đến 1.0
-            currentRadius = 35 - static_cast<int>(30 * progress); // 35 → 5
+            float progress = (float)elapsed / DURATION;
+            currentRadius = 35 - static_cast<int>(30 * progress);
             circle1.setRadius(currentRadius);
             invalidate();
         }
         else
         {
-            // Kết thúc thu nhỏ
             shrinking = false;
             circle1.setVisible(false);
             invalidate();
@@ -131,55 +131,40 @@ void Screen1View::handleTickEvent()
     }
 }
 
-
-
-
 void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
 {
-    const int DEADZONE = 1;
+    if (deltaX == 0 && deltaY == 0)
+        return;
 
+    int16_t adjustedX = deltaY;
+    int16_t adjustedY = -deltaX;
 
-    if (abs(deltaX) < DEADZONE) deltaX = 0;
-    if (abs(deltaY) < DEADZONE) deltaY = 0;
+    accumulatedX += adjustedX;
+    accumulatedY += adjustedY;
 
-    // Nếu không di chuyển thì không gửi
-    if (deltaX == 0 && deltaY == 0) return;
+    int8_t sendX = (int8_t)accumulatedX;
+    int8_t sendY = (int8_t)accumulatedY;
 
-    // Có thể đảo trục tùy theo hướng cảm ứng
-    int16_t adjustedX = deltaY;      // Di chuyển tay theo Y → chuột theo X
-    int16_t adjustedY = -deltaX;     // Di chuyển tay theo X → chuột theo Y
+    accumulatedX -= sendX;
+    accumulatedY -= sendY;
 
-    // Tăng độ nhạy nếu cần
-    adjustedX *= 1;
-    adjustedY *= 1;
+    if (sendX > 127)
+        sendX = 127;
+    if (sendX < -128)
+        sendX = -128;
+    if (sendY > 127)
+        sendY = 127;
+    if (sendY < -128)
+        sendY = -128;
 
-    // Clamp vào vùng hợp lệ cho HID
-    if (adjustedX > 127) adjustedX = 127;
-    if (adjustedX < -128) adjustedX = -128;
-    if (adjustedY > 127) adjustedY = 127;
-    if (adjustedY < -128) adjustedY = -128;
+    if (sendX != 0 || sendY != 0)
+    {
+        mouseHID mouseReport = {0};
+        mouseReport.mouse_x = sendX;
+        mouseReport.mouse_y = sendY;
+        mouseReport.button = 0;
+        mouseReport.wheel = 0;
 
-    mouseHID mouseReport = {0};
-    mouseReport.mouse_x = (int8_t)adjustedX;
-    mouseReport.mouse_y = (int8_t)adjustedY;
-    mouseReport.button = 0;
-    mouseReport.wheel = 0;
-
-    USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
+        USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
+    }
 }
-
-void Screen1View::sendMouseClick(bool leftClick)
-{
-    mouseHID mouseReport = {0};
-
-    mouseReport.button = leftClick ? 1 : 0; // Left button bit
-    mouseReport.mouse_x = 0;
-    mouseReport.mouse_y = 0;
-    mouseReport.wheel = 0;
-
-    // Send HID report
-    USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
-}
-
-
-
