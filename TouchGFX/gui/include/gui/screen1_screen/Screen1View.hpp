@@ -49,13 +49,11 @@ public:
     virtual void handleTickEvent(); // Drawing override
     virtual void draw(touchgfx::Rect &invalidatedArea);
 
-    // Touch effect functions
     void addTouchEffect(int16_t x, int16_t y);
     void updateTouchEffects();
     void drawTouchEffects();
     void drawSimpleTouchEffect(uint8_t index, const touchgfx::Rect &invalidatedArea);
 
-    // Mouse HID functions (swipe gestures removed)
     void sendMousePosition(int16_t deltaX, int16_t deltaY);
     void sendMouseClick(bool leftClick);
     void calculateMouseMovementFromCenter(int16_t touchX, int16_t touchY, int16_t &deltaX, int16_t &deltaY);

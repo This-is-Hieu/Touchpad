@@ -168,3 +168,91 @@ void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
         USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
     }
 }
+
+void Screen1View::sendMouseClick(bool leftClick)
+{
+    mouseHID mouseReport = {0};
+    mouseReport.button = leftClick ? 1 : 0; // Left button bit
+    mouseReport.mouse_x = 0;
+    mouseReport.mouse_y = 0;
+    mouseReport.wheel = 0;
+
+    // Send HID report
+    USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
+}
+
+// Implementation of missing virtual functions
+void Screen1View::leftMouse()
+{
+    // Left mouse click implementation
+    sendMouseClick(true);
+    // Small delay between press and release
+    for (volatile int i = 0; i < 100000; i++)
+        ; // Simple delay
+    sendMouseClick(false);
+}
+
+void Screen1View::moveUp()
+{
+    // Move cursor up
+    sendMousePosition(0, -10);
+}
+
+void Screen1View::moveDown()
+{
+    // Move cursor down
+    sendMousePosition(0, 10);
+}
+
+void Screen1View::moveRight()
+{
+    // Move cursor right
+    sendMousePosition(10, 0);
+}
+
+void Screen1View::moveLeft()
+{
+    // Move cursor left
+    sendMousePosition(-10, 0);
+}
+
+void Screen1View::draw(touchgfx::Rect &invalidatedArea)
+{
+    // Call parent draw method
+    Screen1ViewBase::draw(invalidatedArea);
+
+    // Add custom drawing if needed
+    // drawTouchEffects();
+}
+
+// Touch effect functions (placeholders for now)
+void Screen1View::addTouchEffect(int16_t x, int16_t y)
+{
+    // Implementation for adding touch effects
+    // Currently not used but required by header
+}
+
+void Screen1View::updateTouchEffects()
+{
+    // Implementation for updating touch effects
+    // Currently not used but required by header
+}
+
+void Screen1View::drawTouchEffects()
+{
+    // Implementation for drawing touch effects
+    // Currently not used but required by header
+}
+
+void Screen1View::drawSimpleTouchEffect(uint8_t index, const touchgfx::Rect &invalidatedArea)
+{
+    // Implementation for drawing simple touch effects
+    // Currently not used but required by header
+}
+
+void Screen1View::calculateMouseMovementFromCenter(int16_t touchX, int16_t touchY, int16_t &deltaX, int16_t &deltaY)
+{
+    // Calculate movement from screen center
+    deltaX = touchX - SCREEN_CENTER_X;
+    deltaY = touchY - SCREEN_CENTER_Y;
+}
