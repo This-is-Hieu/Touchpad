@@ -1,11 +1,12 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:104:18:virtual void touchgfx::Screen::afterTransition()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:43:6:virtual void Screen1View::tearDownScreen()	0	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:50:6:virtual void Screen1View::handleClickEvent(const touchgfx::ClickEvent&)	0	static
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:43:6:virtual void Screen1View::tearDownScreen()	0	static
 ../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:19:13:Screen1View::~Screen1View()	8	static
 ../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:19:13:virtual Screen1View::~Screen1View()	8	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:26:1:Screen1View::Screen1View()	8	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:109:6:void Screen1View::sendMousePosition(int16_t, int16_t)	16	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:78:6:virtual void Screen1View::handleDragEvent(const touchgfx::DragEvent&)	0	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:143:6:void Screen1View::sendMouseClick(bool)	16	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:35:6:virtual void Screen1View::setupScreen()	0	static
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:26:1:Screen1View::Screen1View()	8	static
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:137:6:void Screen1View::sendMousePosition(int16_t, int16_t)	16	static
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:171:6:void Screen1View::sendMouseClick(bool)	16	static
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:35:6:virtual void Screen1View::setupScreen()	8	static
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:81:6:virtual void Screen1View::handleDragEvent(const touchgfx::DragEvent&)	24	static
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:50:6:virtual void Screen1View::handleClickEvent(const touchgfx::ClickEvent&)	16	static
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:110:6:virtual void Screen1View::handleTickEvent()	8	static

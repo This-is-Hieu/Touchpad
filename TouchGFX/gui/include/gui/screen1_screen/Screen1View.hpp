@@ -65,6 +65,9 @@ protected:
     static const uint16_t SCREEN_CENTER_Y = SCREEN_HEIGHT / 2; // 160    // Mouse sensitivity settings - Tăng cho màn hình nhỏ
     static const uint8_t MOUSE_SENSITIVITY = 3;                // Tăng từ 3 lên 8 cho màn hình nhỏ
     static const uint8_t DEAD_ZONE_RADIUS = 5;                 // Giảm từ 10 xuống 5 để nhạy hơn
+    bool shrinking = false;			//biến khi có hình tròn tạo ra
+    int currentRadius = 35; 		//kích cỡ
+    uint32_t shrinkStartTick = 0; //lưu thời điểm có hình tròn
 };
 
 #endif // SCREEN1VIEW_HPP

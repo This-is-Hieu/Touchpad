@@ -1,5 +1,5 @@
 Application/User/stm32f4xx_hal_msp.o: \
- D:/Code_nhung/TouchGFXProjects/Touchpad/Core/Src/stm32f4xx_hal_msp.c \
+ D:/BK/20242/Nhúng/TouchGFX/Touchpad/Core/Src/stm32f4xx_hal_msp.c \
  ../../Core/Inc/main.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../../Core/Inc/stm32f4xx_hal_conf.h \

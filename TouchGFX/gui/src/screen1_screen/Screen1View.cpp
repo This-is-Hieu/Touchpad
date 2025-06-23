@@ -35,7 +35,7 @@ Screen1View::Screen1View()
 void Screen1View::setupScreen()
 {
     Screen1ViewBase::setupScreen();
-
+    circle1.setVisible(false);
     // Touch effects will be handled in draw function
     // No need for timer registration
 }
@@ -51,11 +51,14 @@ void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
 {
     if (evt.getType() == touchgfx::ClickEvent::PRESSED)
     {
-
-
-//        touchStartX = evt.getX();
-//        touchStartY = evt.getY();
-//        dragging = false;
+        circle1.setCenter(evt.getX(), evt.getY());
+        currentRadius = 35;
+        circle1.setRadius(currentRadius);
+        circle1.setLineWidth(5);
+        circle1.setVisible(true);
+        circle1.invalidate();
+        shrinkStartTick = HAL_GetTick();
+        shrinking = true;  // Bắt đầu thu nhỏ trong tick
     }
     else if (evt.getType() == touchgfx::ClickEvent::RELEASED)
     {
@@ -81,8 +84,15 @@ void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 
     int16_t deltaX = evt.getDeltaX();
     int16_t deltaY = evt.getDeltaY();
+    shrinkStartTick = HAL_GetTick();
+    circle1.setCenter(evt.getNewX(), evt.getNewY());
+    currentRadius = 35;
+    circle1.setRadius(currentRadius);
+    circle1.setLineWidth(5);
+    circle1.setVisible(true);
+    circle1.invalidate();
 
-
+    shrinking = true;  // Bắt đầu thu nhỏ trong tick
     if (deltaX != 0 || deltaY != 0)
     {
         sendMousePosition(deltaX, deltaY);
@@ -99,9 +109,27 @@ void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 
 void Screen1View::handleTickEvent()
 {
+    if (shrinking)
+    {
+        uint32_t elapsed = HAL_GetTick() - shrinkStartTick;
+        const uint32_t DURATION = 500;
 
+        if (elapsed < DURATION)
+        {
+            float progress = (float)elapsed / DURATION;  // Từ 0.0 đến 1.0
+            currentRadius = 35 - static_cast<int>(30 * progress); // 35 → 5
+            circle1.setRadius(currentRadius);
+            invalidate();
+        }
+        else
+        {
+            // Kết thúc thu nhỏ
+            shrinking = false;
+            circle1.setVisible(false);
+            invalidate();
+        }
+    }
 }
-
 
 
 

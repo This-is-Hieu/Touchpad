@@ -3,7 +3,26 @@
     "Screens": [
       {
         "Name": "Screen1",
-        "Components": [],
+        "CanvasBufferSize": 3600,
+        "Components": [
+          {
+            "Type": "Circle",
+            "Name": "circle1",
+            "Width": 240,
+            "Height": 320,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "CenterX": 40.0,
+            "CenterY": 40.0,
+            "Radius": 35.0,
+            "LineWidth": 5.0,
+            "EndAngle": 360.0,
+            "CapPrecision": "Butt"
+          }
+        ],
         "Interactions": []
       }
     ],
