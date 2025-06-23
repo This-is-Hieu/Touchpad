@@ -1,5 +1,5 @@
 Middlewares/FreeRTOS/stream_buffer.o: \
- D:/BK/20242/Nhúng/TouchGFX/Touchpad/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c \
+ D:/Code_nhung/TouchGFXProjects/Touchpad/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../../Core/Inc/FreeRTOSConfig.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \
