@@ -4,26 +4,11 @@
 #include <gui_generated/screen1_screen/Screen1ViewBase.hpp>
 #include <touchgfx/Color.hpp>
 
-Screen1ViewBase::Screen1ViewBase() :
-    flexButtonCallback(this, &Screen1ViewBase::flexButtonCallbackHandler)
+Screen1ViewBase::Screen1ViewBase()
 {
     __background.setPosition(0, 0, 240, 320);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
-
-    LeftMouse.setBoxWithBorderPosition(0, 0, 50, 160);
-    LeftMouse.setBorderSize(5);
-    LeftMouse.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    LeftMouse.setAction(flexButtonCallback);
-    LeftMouse.setPosition(190, 160, 50, 160);
-    add(LeftMouse);
-
-    RightMouse.setBoxWithBorderPosition(0, 0, 50, 160);
-    RightMouse.setBorderSize(5);
-    RightMouse.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    RightMouse.setAction(flexButtonCallback);
-    RightMouse.setPosition(190, 0, 50, 160);
-    add(RightMouse);
 }
 
 Screen1ViewBase::~Screen1ViewBase()
@@ -34,22 +19,4 @@ Screen1ViewBase::~Screen1ViewBase()
 void Screen1ViewBase::setupScreen()
 {
 
-}
-
-void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
-{
-    if (&src == &LeftMouse)
-    {
-        //Interaction1
-        //When LeftMouse clicked call virtual function
-        //Call leftMouse
-        leftMouse();
-    }
-    if (&src == &RightMouse)
-    {
-        //Interaction2
-        //When RightMouse clicked call virtual function
-        //Call rightMouse
-        rightMouse();
-    }
 }

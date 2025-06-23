@@ -19,8 +19,6 @@ public:
     virtual ~Screen1View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-    virtual void leftMouse();
-    virtual void rightMouse();
 
     // Touch handling functions
     virtual void handleClickEvent(const touchgfx::ClickEvent &evt);
@@ -28,12 +26,12 @@ public:
     virtual void handleTickEvent();
 
     // Drawing override
-    virtual void draw(touchgfx::Rect &invalidatedArea);
+
     // Touch effect drawing
-    void addTouchEffect(int16_t x, int16_t y);
-    void updateTouchEffects();
-    void drawTouchEffects();
-    void drawSimpleTouchEffect(uint8_t index, const touchgfx::Rect &invalidatedArea); // Mouse HID functions
+//    void addTouchEffect(int16_t x, int16_t y);
+//    void updateTouchEffects();
+//    void drawTouchEffects();
+//    void drawSimpleTouchEffect(uint8_t index, const touchgfx::Rect &invalidatedArea); // Mouse HID functions
     void sendMousePosition(int16_t deltaX, int16_t deltaY);
     void sendMouseClick(bool leftClick);
 
