@@ -3,16 +3,16 @@
 D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:40:6:virtual void Screen1View::tearDownScreen()	0	static
 D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:44:6:virtual void Screen1View::leftMouse()	16	static
 D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:53:6:virtual void Screen1View::rightMouse()	16	static
-../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:28:13:Screen1View::~Screen1View()	8	static
-../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:28:13:virtual Screen1View::~Screen1View()	8	static
+../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:19:13:Screen1View::~Screen1View()	8	static
+../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:19:13:virtual Screen1View::~Screen1View()	8	static
 D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:23:1:Screen1View::Screen1View()	8	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:143:6:void Screen1View::addTouchEffect(int16_t, int16_t)	16	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:162:6:void Screen1View::updateTouchEffects()	8	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:192:6:void Screen1View::sendMousePosition(int16_t, int16_t)	16	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:90:6:virtual void Screen1View::handleDragEvent(const touchgfx::DragEvent&)	16	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:215:6:void Screen1View::sendMouseClick(bool)	16	static
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:145:6:void Screen1View::addTouchEffect(int16_t, int16_t)	16	static
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:164:6:void Screen1View::updateTouchEffects()	8	static
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:194:6:void Screen1View::sendMousePosition(int16_t, int16_t)	16	static
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:91:6:virtual void Screen1View::handleDragEvent(const touchgfx::DragEvent&)	16	static
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:228:6:void Screen1View::sendMouseClick(bool)	16	static
 D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:63:6:virtual void Screen1View::handleClickEvent(const touchgfx::ClickEvent&)	16	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:244:6:void Screen1View::drawSimpleTouchEffect(uint8_t, const touchgfx::Rect&)	0	static
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:257:6:void Screen1View::drawSimpleTouchEffect(uint8_t, const touchgfx::Rect&)	0	static
 D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:32:6:virtual void Screen1View::setupScreen()	0	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:120:6:virtual void Screen1View::handleTickEvent()	8	static
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:229:6:virtual void Screen1View::draw(touchgfx::Rect&)	0	static
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:122:6:virtual void Screen1View::handleTickEvent()	8	static
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:242:6:virtual void Screen1View::draw(touchgfx::Rect&)	0	static

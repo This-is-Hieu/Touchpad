@@ -72,6 +72,7 @@ void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
     }
     else if (evt.getType() == touchgfx::ClickEvent::RELEASED)
     {
+    	addTouchEffect(evt.getX(), evt.getY());
 
         if (!dragging)
         {
@@ -117,6 +118,7 @@ void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 }
 
 // Đồ họa
+
 void Screen1View::handleTickEvent()
 {
     // Update touch effects animation
@@ -191,24 +193,35 @@ void Screen1View::updateTouchEffects()
 
 void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
 {
+    const int DEADZONE = 2;
+
+    // Lọc nhiễu chuyển động nhỏ
+    if (abs(deltaX) < DEADZONE) deltaX = 0;
+    if (abs(deltaY) < DEADZONE) deltaY = 0;
+
+    // Nếu không di chuyển thì không gửi
+    if (deltaX == 0 && deltaY == 0) return;
+
+    // Có thể đảo trục tùy theo hướng cảm ứng
+    int16_t adjustedX = deltaY;      // Di chuyển tay theo Y → chuột theo X
+    int16_t adjustedY = -deltaX;     // Di chuyển tay theo X → chuột theo Y
+
+    // Tăng độ nhạy nếu cần
+    adjustedX *= MOUSE_SENSITIVITY;
+    adjustedY *= MOUSE_SENSITIVITY;
+
+    // Clamp vào vùng hợp lệ cho HID
+    if (adjustedX > 127) adjustedX = 127;
+    if (adjustedX < -128) adjustedX = -128;
+    if (adjustedY > 127) adjustedY = 127;
+    if (adjustedY < -128) adjustedY = -128;
+
     mouseHID mouseReport = {0};
-
-    // Clamp delta values to int8_t range
-    if (deltaX > 127)
-        deltaX = 127;
-    if (deltaX < -128)
-        deltaX = -128;
-    if (deltaY > 127)
-        deltaY = 127;
-    if (deltaY < -128)
-        deltaY = -128;
-
-    mouseReport.mouse_x = (int8_t)deltaX;
-    mouseReport.mouse_y = (int8_t)deltaY;
+    mouseReport.mouse_x = (int8_t)adjustedX;
+    mouseReport.mouse_y = (int8_t)adjustedY;
     mouseReport.button = 0;
     mouseReport.wheel = 0;
 
-    // Send HID report
     USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
 }
 

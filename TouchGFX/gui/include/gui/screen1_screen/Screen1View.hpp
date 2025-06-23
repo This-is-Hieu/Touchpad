@@ -10,16 +10,7 @@
 #include <touchgfx/Color.hpp>
 #include <cstdint>
 
-// Struct để lưu thông tin touch và animation
-struct TouchEffect
-{
-    int16_t x, y;
-    uint16_t radius;
-    uint8_t alpha;
-    bool active;
-    uint16_t startRadius;
-    uint32_t startTime;
-};
+
 
 class Screen1View : public Screen1ViewBase
 {
@@ -53,6 +44,15 @@ protected:
     bool dragging = false;
 
     // Animation parameters
+    struct TouchEffect
+    {
+        int16_t x, y;
+        uint16_t radius;
+        uint8_t alpha;
+        bool active;
+        uint16_t startRadius;
+        uint32_t startTime;
+    };
     static const uint16_t EFFECT_DURATION_MS = 1000;
     static const uint16_t MAX_CIRCLE_RADIUS = 50;
     static const uint8_t MAX_TOUCH_EFFECTS = 5;
@@ -65,7 +65,7 @@ protected:
     static const uint16_t SCREEN_HEIGHT = 320;
     static const uint16_t SCREEN_CENTER_X = SCREEN_WIDTH / 2;  // 120
     static const uint16_t SCREEN_CENTER_Y = SCREEN_HEIGHT / 2; // 160    // Mouse sensitivity settings - Tăng cho màn hình nhỏ
-    static const uint8_t MOUSE_SENSITIVITY = 8;                // Tăng từ 3 lên 8 cho màn hình nhỏ
+    static const uint8_t MOUSE_SENSITIVITY = 3;                // Tăng từ 3 lên 8 cho màn hình nhỏ
     static const uint8_t DEAD_ZONE_RADIUS = 5;                 // Giảm từ 10 xuống 5 để nhạy hơn
 };
 
