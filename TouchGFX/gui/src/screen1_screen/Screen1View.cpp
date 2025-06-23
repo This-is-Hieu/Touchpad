@@ -141,19 +141,23 @@ void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
     int16_t adjustedX = deltaY;
     int16_t adjustedY = -deltaX;
 
+    // Apply exponential smoothing để giảm jitter
+            const float smoothingFactor = 0.3f; // 0.0 = no smoothing, 1.0 = maximum smoothing
+            smoothedDeltaX = smoothedDeltaX * smoothingFactor + adjustedX * (1.0f - smoothingFactor);
+            smoothedDeltaY = smoothedDeltaY * smoothingFactor + adjustedY * (1.0f - smoothingFactor);
 
-    adjustedX *= 1.5;
-    adjustedY *= 1.5;
+            smoothedDeltaX *= 1;
+            smoothedDeltaY *= 1;
 
 
-    if (adjustedX > 127) adjustedX = 127;
-    if (adjustedX < -128) adjustedX = -128;
-    if (adjustedY > 127) adjustedY = 127;
-    if (adjustedY < -128) adjustedY = -128;
+    if (smoothedDeltaX > 127) smoothedDeltaX = 127;
+    if (smoothedDeltaX < -128) smoothedDeltaX = -128;
+    if (smoothedDeltaY > 127) smoothedDeltaY = 127;
+    if (smoothedDeltaY < -128) smoothedDeltaY = -128;
 
     mouseHID mouseReport = {0};
-    mouseReport.mouse_x = (int8_t)adjustedX;
-    mouseReport.mouse_y = (int8_t)adjustedY;
+    mouseReport.mouse_x = (int8_t)smoothedDeltaX;
+    mouseReport.mouse_y = (int8_t)smoothedDeltaY;
     mouseReport.button = 0;
     mouseReport.wheel = 0;
 

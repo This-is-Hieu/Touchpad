@@ -31,7 +31,8 @@ public:
 
 
 protected:
-
+    float smoothedDeltaX = 0.0f;
+    float smoothedDeltaY = 0.0f;
     bool shrinking = false;
     int currentRadius = 35;
     uint32_t shrinkStartTick = 0; //lưu thời điểm có hình tròn
