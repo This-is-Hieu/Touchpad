@@ -10,8 +10,6 @@
 
 #include <touchgfx/widgets/canvas/AbstractPainterARGB8888.hpp>
 
-//float scale_x = 1080.0f / 240.0f;
-//float scale_y = 1920.0f / 320.0f;
 extern USBD_HandleTypeDef hUsbDeviceHS;
 
 // Mouse HID report structure
@@ -25,19 +23,14 @@ typedef struct
 
 Screen1View::Screen1View()
 {
-//    // Initialize touch effects
-//    for (uint8_t i = 0; i < MAX_TOUCH_EFFECTS; i++)
-//    {
-//        touchEffects[i].active = false;
-//    }
+
 }
 
 void Screen1View::setupScreen()
 {
     Screen1ViewBase::setupScreen();
     circle1.setVisible(false);
-    // Touch effects will be handled in draw function
-    // No need for timer registration
+
 }
 
 void Screen1View::tearDownScreen()
@@ -77,13 +70,14 @@ void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
     }
 }
 
-
+int16_t deltaX = 0;
+int16_t deltaY = 0;
 void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 {
-    // Nếu đây là frame đầu tiên khi bắt đầu kéo
 
-    int16_t deltaX = evt.getDeltaX();
-    int16_t deltaY = evt.getDeltaY();
+
+    deltaX = evt.getDeltaX();
+    deltaY = evt.getDeltaY();
     shrinkStartTick = HAL_GetTick();
     circle1.setCenter(evt.getNewX(), evt.getNewY());
     currentRadius = 35;
@@ -93,14 +87,6 @@ void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
     circle1.invalidate();
 
     shrinking = true;  // Bắt đầu thu nhỏ trong tick
-    if (deltaX != 0 || deltaY != 0)
-    {
-        sendMousePosition(deltaX, deltaY);
-    }
-
-    // Cập nhật lại tọa độ làm mốc cho frame tiếp theo
-//    touchStartX = evt.getNewX();
-//    touchStartY = evt.getNewY();
 
 
 }
@@ -109,6 +95,12 @@ void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 
 void Screen1View::handleTickEvent()
 {
+	if (deltaX != 0 || deltaY != 0)
+	{
+	        sendMousePosition(deltaX, deltaY);
+	        deltaX = 0;
+	        deltaY = 0;
+	}
     if (shrinking)
     {
         uint32_t elapsed = HAL_GetTick() - shrinkStartTick;
@@ -116,7 +108,7 @@ void Screen1View::handleTickEvent()
 
         if (elapsed < DURATION)
         {
-            float progress = (float)elapsed / DURATION;  // Từ 0.0 đến 1.0
+            float progress = (float)elapsed / DURATION;  //  0.0 -> 1.0
             currentRadius = 35 - static_cast<int>(30 * progress); // 35 → 5
             circle1.setRadius(currentRadius);
             invalidate();
@@ -142,18 +134,18 @@ void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
     if (abs(deltaX) < DEADZONE) deltaX = 0;
     if (abs(deltaY) < DEADZONE) deltaY = 0;
 
-    // Nếu không di chuyển thì không gửi
+
     if (deltaX == 0 && deltaY == 0) return;
 
-    // Có thể đảo trục tùy theo hướng cảm ứng
-    int16_t adjustedX = deltaY;      // Di chuyển tay theo Y → chuột theo X
-    int16_t adjustedY = -deltaX;     // Di chuyển tay theo X → chuột theo Y
 
-    // Tăng độ nhạy nếu cần
-    adjustedX *= 1;
-    adjustedY *= 1;
+    int16_t adjustedX = deltaY;
+    int16_t adjustedY = -deltaX;
 
-    // Clamp vào vùng hợp lệ cho HID
+
+    adjustedX *= 1.5;
+    adjustedY *= 1.5;
+
+
     if (adjustedX > 127) adjustedX = 127;
     if (adjustedX < -128) adjustedX = -128;
     if (adjustedY > 127) adjustedY = 127;
@@ -172,12 +164,12 @@ void Screen1View::sendMouseClick(bool leftClick)
 {
     mouseHID mouseReport = {0};
 
-    mouseReport.button = leftClick ? 1 : 0; // Left button bit
+    mouseReport.button = leftClick ? 1 : 0;
     mouseReport.mouse_x = 0;
     mouseReport.mouse_y = 0;
     mouseReport.wheel = 0;
 
-    // Send HID report
+
     USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
 }
 
