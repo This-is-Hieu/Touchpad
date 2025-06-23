@@ -10,8 +10,8 @@
 
 #include <touchgfx/widgets/canvas/AbstractPainterARGB8888.hpp>
 
-float scale_x = 1080.0f / 240.0f;
-float scale_y = 1920.0f / 320.0f;
+//float scale_x = 1080.0f / 240.0f;
+//float scale_y = 1920.0f / 320.0f;
 extern USBD_HandleTypeDef hUsbDeviceHS;
 
 // Mouse HID report structure
@@ -122,8 +122,8 @@ void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
     int16_t adjustedY = -deltaX;     // Di chuyển tay theo X → chuột theo Y
 
     // Tăng độ nhạy nếu cần
-    adjustedX *= scale_y;
-    adjustedY *= scale_x;
+    adjustedX *= 1;
+    adjustedY *= 1;
 
     // Clamp vào vùng hợp lệ cho HID
     if (adjustedX > 127) adjustedX = 127;
