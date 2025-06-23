@@ -10,7 +10,8 @@
 
 #include <touchgfx/widgets/canvas/AbstractPainterARGB8888.hpp>
 
-
+float scale_x = 1080.0f / 240.0f;
+float scale_y = 1920.0f / 320.0f;
 extern USBD_HandleTypeDef hUsbDeviceHS;
 
 // Mouse HID report structure
@@ -24,11 +25,11 @@ typedef struct
 
 Screen1View::Screen1View()
 {
-    // Initialize touch effects
-    for (uint8_t i = 0; i < MAX_TOUCH_EFFECTS; i++)
-    {
-        touchEffects[i].active = false;
-    }
+//    // Initialize touch effects
+//    for (uint8_t i = 0; i < MAX_TOUCH_EFFECTS; i++)
+//    {
+//        touchEffects[i].active = false;
+//    }
 }
 
 void Screen1View::setupScreen()
@@ -52,9 +53,9 @@ void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
     {
 
 
-        touchStartX = evt.getX();
-        touchStartY = evt.getY();
-        dragging = false;
+//        touchStartX = evt.getX();
+//        touchStartY = evt.getY();
+//        dragging = false;
     }
     else if (evt.getType() == touchgfx::ClickEvent::RELEASED)
     {
@@ -67,9 +68,9 @@ void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
 //            sendMouseClick(false);
 //        }
 
-        dragging = false;
-        touchStartX = -1;
-        touchStartY = -1;
+//        dragging = false;
+//        touchStartX = -1;
+//        touchStartY = -1;
     }
 }
 
@@ -121,8 +122,8 @@ void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
     int16_t adjustedY = -deltaX;     // Di chuyển tay theo X → chuột theo Y
 
     // Tăng độ nhạy nếu cần
-    adjustedX *= 1;
-    adjustedY *= 1;
+    adjustedX *= scale_y;
+    adjustedY *= scale_x;
 
     // Clamp vào vùng hợp lệ cho HID
     if (adjustedX > 127) adjustedX = 127;
