@@ -4,6 +4,7 @@
 #include <touchgfx/Color.hpp>
 #include <touchgfx/Application.hpp>
 #include <cmath>
+#include <cstdint>
 #include "main.h"
 #include "usbd_hid.h"
 #include "stm32f4xx_hal.h"
@@ -27,6 +28,21 @@ Screen1View::Screen1View()
     {
         touchEffects[i].active = false;
     }
+
+    // Initialize swipe data
+    swipeData.active = false;
+    swipeData.gestureDetected = false; // Initialize touch tracking variables
+    touchStartX = -1;
+    touchStartY = -1;
+    lastDragX = -1;
+    lastDragY = -1;
+    dragging = false;
+    accumulatedDeltaX = 0.0f;
+    accumulatedDeltaY = 0.0f;
+    lastMovementX = 0;
+    lastMovementY = 0;
+    smoothedDeltaX = 0.0f;
+    smoothedDeltaY = 0.0f;
 }
 
 void Screen1View::setupScreen()
@@ -43,19 +59,23 @@ void Screen1View::tearDownScreen()
 }
 void Screen1View::leftMouse()
 {
-    uint8_t move = 'L';
-    if (osMessageQueueGetCount(myQueue01Handle) < 5)
-    {
-        osMessageQueuePut(myQueue01Handle, &move, 0, 10);
-    }
-}
+    // Gửi left click press
+    mouseHID mouseReport = {0};
+    mouseReport.button = 0x01; // Bit 0 = left button
+    mouseReport.mouse_x = 0;
+    mouseReport.mouse_y = 0;
+    mouseReport.wheel = 0;
 
-void Screen1View::rightMouse()
-{
-    uint8_t move = 'R';
     if (osMessageQueueGetCount(myQueue01Handle) < 5)
     {
-        osMessageQueuePut(myQueue01Handle, &move, 0, 10);
+        osMessageQueuePut(myQueue01Handle, &mouseReport, 0, 10);
+    }
+
+    // Gửi left click release
+    mouseReport.button = 0x00; // Release all buttons
+    if (osMessageQueueGetCount(myQueue01Handle) < 5)
+    {
+        osMessageQueuePut(myQueue01Handle, &mouseReport, 0, 10);
     }
 }
 
@@ -95,59 +115,84 @@ void Screen1View::moveDown()
     }
 }
 
-// Touch event handling
+// Touch event handling - Với swipe gesture detection
 void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
 {
     if (evt.getType() == touchgfx::ClickEvent::PRESSED)
     {
-        // Add touch effect at touch position
-        addTouchEffect(evt.getX(), evt.getY());
-
-        // Calculate mouse movement based on distance from center
-        int16_t deltaX, deltaY;
-        calculateMouseMovementFromCenter(evt.getX(), evt.getY(), deltaX, deltaY);
-
-        // Send mouse movement if not in dead zone
-        if (deltaX != 0 || deltaY != 0)
-        {
-            sendMousePosition(deltaX, deltaY);
-        }
-
-        // Send mouse click event
-        sendMouseClick(true);
-
-        // Store touch position
+        // Lưu vị trí bắt đầu và reset drag tracking
         touchStartX = evt.getX();
         touchStartY = evt.getY();
+        lastDragX = touchStartX;
+        lastDragY = touchStartY;
         dragging = false;
+
+        // Initialize swipe detection
+        swipeData.startX = evt.getX();
+        swipeData.startY = evt.getY();
+        swipeData.startTime = HAL_GetTick();
+        swipeData.active = true;
+        swipeData.gestureDetected = false;
+
+        // Thêm visual effect để confirm touch được detect
+        addTouchEffect(evt.getX(), evt.getY());
     }
     else if (evt.getType() == touchgfx::ClickEvent::RELEASED)
-    {
-        // Send mouse release event
-        sendMouseClick(false);
+    { // End swipe detection
+        if (swipeData.active)
+        {
+            swipeData.active = false;
+            // Swipe detection disabled - only mouse movement now
+        }
 
+        // Reset touch state
         touchStartX = -1;
         touchStartY = -1;
+        lastDragX = -1;
+        lastDragY = -1;
         dragging = false;
+        accumulatedDeltaX = 0.0f;
+        accumulatedDeltaY = 0.0f;
+        lastMovementX = 0;
+        lastMovementY = 0;
     }
 }
 
 void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 {
-    // Khi drag, liên tục tính toán movement từ tâm màn hình
-    int16_t deltaX, deltaY;
-    calculateMouseMovementFromCenter(evt.getNewX(), evt.getNewY(), deltaX, deltaY);
-
-    // Send mouse movement nếu không trong dead zone
-    if (deltaX != 0 || deltaY != 0)
+    if (touchStartX >= 0 && touchStartY >= 0)
     {
-        sendMousePosition(deltaX, deltaY);
-    }
+        // Tính delta movement từ vị trí drag trước đó
+        int16_t deltaX = evt.getNewX() - lastDragX;
+        int16_t deltaY = evt.getNewY() - lastDragY;
 
-    // Update touch position
-    touchStartX = evt.getNewX();
-    touchStartY = evt.getNewY();
-    dragging = true;
+        // Filter out extreme jumps (hardware glitches)
+        if (abs(deltaX) > 30 || abs(deltaY) > 30)
+        {
+            // Possible hardware glitch, ignore this event
+            lastDragX = evt.getNewX();
+            lastDragY = evt.getNewY();
+            return;
+        }
+
+        // Apply exponential smoothing để giảm jitter
+        const float smoothingFactor = 0.7f; // 0.0 = no smoothing, 1.0 = maximum smoothing
+        smoothedDeltaX = smoothedDeltaX * smoothingFactor + deltaX * (1.0f - smoothingFactor);
+        smoothedDeltaY = smoothedDeltaY * smoothingFactor + deltaY * (1.0f - smoothingFactor);
+
+        // Apply sensitivity
+        float finalDeltaX = smoothedDeltaX * TOUCHPAD_SENSITIVITY;
+        float finalDeltaY = smoothedDeltaY * TOUCHPAD_SENSITIVITY; // Send movement only if significant enough
+        if (abs(finalDeltaX) >= 0.8f || abs(finalDeltaY) >= 0.8f)
+        {
+            dragging = true;
+            sendMousePosition((int16_t)finalDeltaX, (int16_t)finalDeltaY);
+        }
+
+        // Luôn update last drag position
+        lastDragX = evt.getNewX();
+        lastDragY = evt.getNewY();
+    }
 }
 
 void Screen1View::handleTickEvent()
@@ -194,13 +239,13 @@ void Screen1View::addTouchEffect(int16_t x, int16_t y)
 
 void Screen1View::updateTouchEffects()
 {
-    uint32_t currentTime = HAL_GetTick();
+    std::uint32_t currentTime = HAL_GetTick();
 
-    for (uint8_t i = 0; i < MAX_TOUCH_EFFECTS; i++)
+    for (std::uint8_t i = 0; i < MAX_TOUCH_EFFECTS; i++)
     {
         if (touchEffects[i].active)
         {
-            uint32_t elapsedTime = currentTime - touchEffects[i].startTime;
+            std::uint32_t elapsedTime = currentTime - touchEffects[i].startTime;
 
             if (elapsedTime >= EFFECT_DURATION_MS)
             {
@@ -224,25 +269,41 @@ void Screen1View::updateTouchEffects()
 
 void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
 {
+    static std::uint32_t lastSendTime = 0;
+    std::uint32_t currentTime = HAL_GetTick();
+
+    // Rate limiting: không gửi quá 100 reports/giây (10ms interval)
+    if (currentTime - lastSendTime < 10)
+    {
+        return;
+    }
+    lastSendTime = currentTime;
+
     mouseHID mouseReport = {0};
 
-    // Clamp delta values to int8_t range
-    if (deltaX > 127)
-        deltaX = 127;
-    if (deltaX < -128)
-        deltaX = -128;
-    if (deltaY > 127)
-        deltaY = 127;
-    if (deltaY < -128)
-        deltaY = -128;
+    // Clamp delta values to reasonable range trước khi convert
+    if (deltaX > 20)
+        deltaX = 20;
+    if (deltaX < -20)
+        deltaX = -20;
+    if (deltaY > 20)
+        deltaY = 20;
+    if (deltaY < -20)
+        deltaY = -20;
 
     mouseReport.mouse_x = (int8_t)deltaX;
     mouseReport.mouse_y = (int8_t)deltaY;
     mouseReport.button = 0;
     mouseReport.wheel = 0;
 
-    // Send HID report
+    // Send directly via USB HID
     USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
+
+    // Backup via message queue
+    if (osMessageQueueGetCount(myQueue01Handle) < 3) // Giảm queue size
+    {
+        osMessageQueuePut(myQueue01Handle, &mouseReport, 0, 5);
+    }
 }
 
 void Screen1View::sendMouseClick(bool leftClick)
@@ -252,9 +313,7 @@ void Screen1View::sendMouseClick(bool leftClick)
     mouseReport.button = leftClick ? 1 : 0; // Left button bit
     mouseReport.mouse_x = 0;
     mouseReport.mouse_y = 0;
-    mouseReport.wheel = 0;
-
-    // Send HID report
+    mouseReport.wheel = 0; // Send HID report
     USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
 }
 
@@ -288,47 +347,34 @@ void Screen1View::drawSimpleTouchEffect(uint8_t index, const touchgfx::Rect &inv
     // In a production app, you would:
     // 1. Use TouchGFX Designer to add visual widgets
     // 2. Use Canvas widget with custom painter
-    // 3. Or use built-in shapes/circles from TouchGFX
-
-    // Placeholder - effect is tracked but not visually drawn
+    // 3. Or use built-in shapes/circles from TouchGFX    // Placeholder - effect is tracked but not visually drawn
     (void)effect;          // Suppress unused variable warning
     (void)invalidatedArea; // Suppress unused variable warning
 }
 
 void Screen1View::calculateMouseMovementFromCenter(int16_t touchX, int16_t touchY, int16_t &deltaX, int16_t &deltaY)
 {
-    // Tính khoảng cách từ điểm touch đến tâm màn hình
     int16_t distanceFromCenterX = touchX - SCREEN_CENTER_X;
     int16_t distanceFromCenterY = touchY - SCREEN_CENTER_Y;
 
-    // Tính khoảng cách tổng (radius)
-    float distance = sqrt(distanceFromCenterX * distanceFromCenterX + distanceFromCenterY * distanceFromCenterY);
+    // Calculate distance from center
+    float distance = sqrtf((float)(distanceFromCenterX * distanceFromCenterX + distanceFromCenterY * distanceFromCenterY));
 
-    // Nếu trong vùng chết (gần tâm) thì không di chuyển
     if (distance < DEAD_ZONE_RADIUS)
     {
         deltaX = 0;
         deltaY = 0;
         return;
-    } // Tính toán movement dựa trên khoảng cách từ tâm
-    // Tối ưu cho màn hình nhỏ - tăng độ nhạy
-    float movementScale = (distance / (SCREEN_WIDTH / 4)) * MOUSE_SENSITIVITY; // Chia 4 thay vì 2
-
-    // Thêm boost cho khoảng cách gần để responsive hơn
-    if (distance < 30)
-    {
-        movementScale *= 1.5f; // Boost 50% cho touch gần tâm
     }
 
-    // Giới hạn movement tối đa - tăng lên cho màn hình nhỏ
-    if (movementScale > 20.0f)
-        movementScale = 20.0f;
+    // Apply sensitivity
+    float movementScale = (distance / (SCREEN_WIDTH / 4)) * TOUCHPAD_SENSITIVITY; // Chia 4 thay vì 2
 
-    // Tính delta X và Y theo hướng từ tâm đến điểm touch
-    deltaX = (int16_t)(distanceFromCenterX * movementScale / distance);
-    deltaY = (int16_t)(distanceFromCenterY * movementScale / distance);
+    // Apply scale and clamp
+    deltaX = (int16_t)(distanceFromCenterX * movementScale);
+    deltaY = (int16_t)(distanceFromCenterY * movementScale);
 
-    // Clamp values to int8_t range for HID
+    // Clamp to prevent overflow
     if (deltaX > 127)
         deltaX = 127;
     if (deltaX < -128)

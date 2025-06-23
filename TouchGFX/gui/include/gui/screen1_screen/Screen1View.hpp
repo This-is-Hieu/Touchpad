@@ -21,6 +21,17 @@ struct TouchEffect
     uint32_t startTime;
 };
 
+// Struct cho swipe gesture detection
+struct SwipeData
+{
+    int16_t startX, startY;
+    int16_t endX, endY;
+    uint32_t startTime;
+    uint32_t endTime;
+    bool active;
+    bool gestureDetected;
+};
+
 class Screen1View : public Screen1ViewBase
 {
 public:
@@ -29,24 +40,22 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
     virtual void leftMouse();
-    virtual void rightMouse();
     virtual void moveUp();
     virtual void moveDown();
     virtual void moveRight();
-    virtual void moveLeft();
-
-    // Touch handling functions
+    virtual void moveLeft(); // Touch handling functions (gesture events removed)
     virtual void handleClickEvent(const touchgfx::ClickEvent &evt);
     virtual void handleDragEvent(const touchgfx::DragEvent &evt);
-    virtual void handleTickEvent();
-
-    // Drawing override
+    virtual void handleTickEvent(); // Drawing override
     virtual void draw(touchgfx::Rect &invalidatedArea);
-    // Touch effect drawing
+
+    // Touch effect functions
     void addTouchEffect(int16_t x, int16_t y);
     void updateTouchEffects();
     void drawTouchEffects();
-    void drawSimpleTouchEffect(uint8_t index, const touchgfx::Rect &invalidatedArea); // Mouse HID functions
+    void drawSimpleTouchEffect(uint8_t index, const touchgfx::Rect &invalidatedArea);
+
+    // Mouse HID functions (swipe gestures removed)
     void sendMousePosition(int16_t deltaX, int16_t deltaY);
     void sendMouseClick(bool leftClick);
     void calculateMouseMovementFromCenter(int16_t touchX, int16_t touchY, int16_t &deltaX, int16_t &deltaY);
@@ -54,23 +63,36 @@ public:
 protected:
     int16_t touchStartX = -1;
     int16_t touchStartY = -1;
+    int16_t lastDragX = -1;
+    int16_t lastDragY = -1;
     bool dragging = false;
+    float accumulatedDeltaX = 0.0f;
+    float accumulatedDeltaY = 0.0f;
+    int16_t lastMovementX = 0;
+    int16_t lastMovementY = 0;
+
+    // Smoothing for stable movement
+    float smoothedDeltaX = 0.0f;
+    float smoothedDeltaY = 0.0f; // Swipe gesture detection
+    SwipeData swipeData;
 
     // Animation parameters
-    static const uint16_t EFFECT_DURATION_MS = 1000;
-    static const uint16_t MAX_CIRCLE_RADIUS = 50;
-    static const uint8_t MAX_TOUCH_EFFECTS = 5;
+    static const std::uint16_t EFFECT_DURATION_MS = 1000;
+    static const std::uint16_t MAX_CIRCLE_RADIUS = 50;
+    static const std::uint8_t MAX_TOUCH_EFFECTS = 5;
 
     // Touch effects
     TouchEffect touchEffects[MAX_TOUCH_EFFECTS];
 
     // Screen dimensions for mouse mapping
-    static const uint16_t SCREEN_WIDTH = 240;
-    static const uint16_t SCREEN_HEIGHT = 320;
-    static const uint16_t SCREEN_CENTER_X = SCREEN_WIDTH / 2;  // 120
-    static const uint16_t SCREEN_CENTER_Y = SCREEN_HEIGHT / 2; // 160    // Mouse sensitivity settings - Tăng cho màn hình nhỏ
-    static const uint8_t MOUSE_SENSITIVITY = 8;                // Tăng từ 3 lên 8 cho màn hình nhỏ
-    static const uint8_t DEAD_ZONE_RADIUS = 5;                 // Giảm từ 10 xuống 5 để nhạy hơn
+    static const std::uint16_t SCREEN_WIDTH = 240;
+    static const std::uint16_t SCREEN_HEIGHT = 320;
+    static const std::uint16_t SCREEN_CENTER_X = SCREEN_WIDTH / 2;  // 120
+    static const std::uint16_t SCREEN_CENTER_Y = SCREEN_HEIGHT / 2; // 160
+
+    // Mouse sensitivity settings
+    static constexpr float TOUCHPAD_SENSITIVITY = 2.5f; // Sensitivity tối ưu
+    static const std::uint8_t DEAD_ZONE_RADIUS = 5;     // Dead zone for small movements
 };
 
 #endif // SCREEN1VIEW_HPP
