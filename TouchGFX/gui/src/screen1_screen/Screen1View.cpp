@@ -102,8 +102,6 @@ void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
     int16_t deltaX = evt.getNewX() - touchStartX;
     int16_t deltaY = evt.getNewY() - touchStartY;
 
-    deltaX *= MOUSE_SENSITIVITY;
-    deltaY *= MOUSE_SENSITIVITY;
 
     if (deltaX != 0 || deltaY != 0)
     {
