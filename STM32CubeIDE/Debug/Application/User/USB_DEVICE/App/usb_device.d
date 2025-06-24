@@ -1,6 +1,6 @@
 Application/User/USB_DEVICE/App/usb_device.o: \
- D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usb_device.c \
- D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usb_device.h \
+ D:/BK/20242/Nhúng/TouchGFX/Touchpad/USB_DEVICE/App/usb_device.c \
+ D:/BK/20242/Nhúng/TouchGFX/Touchpad/USB_DEVICE/App/usb_device.h \
  ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h \
  ../../Drivers/CMSIS/Include/core_cm4.h \
@@ -34,6 +34,7 @@ Application/User/USB_DEVICE/App/usb_device.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ltdc_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
@@ -47,10 +48,10 @@ Application/User/USB_DEVICE/App/usb_device.o: \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
- D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usbd_desc.h \
+ D:/BK/20242/Nhúng/TouchGFX/Touchpad/USB_DEVICE/App/usbd_desc.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
-D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usb_device.h:
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/USB_DEVICE/App/usb_device.h:
 ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h:
 ../../Drivers/CMSIS/Include/core_cm4.h:
@@ -84,6 +85,7 @@ D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usb_device.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ltdc_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
@@ -98,6 +100,6 @@ D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usb_device.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
-D:/Code_nhung/TouchGFXProjects/Touchpad/USB_DEVICE/App/usbd_desc.h:
+D:/BK/20242/Nhúng/TouchGFX/Touchpad/USB_DEVICE/App/usbd_desc.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:

@@ -22,8 +22,7 @@
 #include "cmsis_os.h"
 #include "app_touchgfx.h"
 #include "usb_device.h"
-#include "usbd_hid.h"
-extern USBD_HandleTypeDef hUsbDeviceHS;
+#include "stm32f4xx_hal.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -80,6 +79,8 @@ I2C_HandleTypeDef hi2c3;
 
 LTDC_HandleTypeDef hltdc;
 
+RNG_HandleTypeDef hrng;
+
 SPI_HandleTypeDef hspi5;
 
 SDRAM_HandleTypeDef hsdram1;
@@ -123,6 +124,7 @@ static void MX_SPI5_Init(void);
 static void MX_FMC_Init(void);
 static void MX_LTDC_Init(void);
 static void MX_DMA2D_Init(void);
+static void MX_RNG_Init(void);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 void StartTask03(void *argument);
@@ -201,6 +203,7 @@ int main(void)
   MX_FMC_Init();
   MX_LTDC_Init();
   MX_DMA2D_Init();
+  MX_RNG_Init();
   MX_TouchGFX_Init();
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
@@ -485,6 +488,32 @@ static void MX_LTDC_Init(void)
 
   LcdDrv->DisplayOff();
   /* USER CODE END LTDC_Init 2 */
+
+}
+
+/**
+  * @brief RNG Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_RNG_Init(void)
+{
+
+  /* USER CODE BEGIN RNG_Init 0 */
+
+  /* USER CODE END RNG_Init 0 */
+
+  /* USER CODE BEGIN RNG_Init 1 */
+
+  /* USER CODE END RNG_Init 1 */
+  hrng.Instance = RNG;
+  if (HAL_RNG_Init(&hrng) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN RNG_Init 2 */
+
+  /* USER CODE END RNG_Init 2 */
 
 }
 
@@ -1009,55 +1038,12 @@ void StartDefaultTask(void *argument)
 /* USER CODE END Header_StartTask03 */
 void StartTask03(void *argument)
 {
-  for (;;)
+  /* USER CODE BEGIN StartTask03 */
+  /* Infinite loop */
+  for(;;)
   {
-    if (osMessageQueueGetCount(myQueue01Handle) > 0)
-    {
-      uint8_t data;
-      osMessageQueueGet(myQueue01Handle, &data, NULL, osWaitForever);
-
-      // Reset trạng thái trước mỗi lệnh mới
-      mousehid.button = 0x00;
-      mousehid.mouse_x = 0;
-      mousehid.mouse_y = 0;
-      mousehid.wheel = 0;
-
-      switch (data)
-      {
-        case 'L': // Left Click
-          mousehid.button = 0x01;
-          USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          mousehid.button = 0x00; // release
-          USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          break;
-
-        case 'R': // Right Click
-          mousehid.button = 0x02;
-          USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          mousehid.button = 0x00; // release
-          USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          break;
-
-        case 'T': // Touch
-          mousehid.mouse_y = -5;
-          USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          break;
-
-        default:
-        	mousehid.button = 0x00;
-        	USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mousehid, sizeof(mousehid));
-          break;
-      }
-
-      // Reset lại sau mỗi lần gửi để tránh giữ tọa độ cũ
-      mousehid.mouse_x = 0;
-      mousehid.mouse_y = 0;
-      mousehid.wheel = 0;
-    }
-
     osDelay(1);
   }
-
   /* USER CODE END StartTask03 */
 }
 

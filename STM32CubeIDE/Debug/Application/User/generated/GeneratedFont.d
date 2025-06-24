@@ -1,5 +1,5 @@
 Application/User/generated/GeneratedFont.o: \
- D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/generated/fonts/src/GeneratedFont.cpp \
+ D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/generated/fonts/src/GeneratedFont.cpp \
  ../../TouchGFX/generated/fonts/include/fonts/GeneratedFont.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/ConstFont.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Font.hpp \

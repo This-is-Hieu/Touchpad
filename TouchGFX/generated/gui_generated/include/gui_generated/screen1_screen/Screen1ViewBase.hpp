@@ -10,6 +10,7 @@
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/widgets/canvas/Circle.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
+#include <touchgfx/containers/buttons/Buttons.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
 {
@@ -17,6 +18,18 @@ public:
     Screen1ViewBase();
     virtual ~Screen1ViewBase();
     virtual void setupScreen();
+
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void leftClick()
+    {
+        // Override and implement this function in Screen1
+    }
+    virtual void rightClick()
+    {
+        // Override and implement this function in Screen1
+    }
 
 protected:
     FrontendApplication& application() {
@@ -29,6 +42,8 @@ protected:
     touchgfx::Box __background;
     touchgfx::Circle circle1;
     touchgfx::PainterRGB565 circle1Painter;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  leftButton;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  rightButton;
 
 private:
 
@@ -37,6 +52,16 @@ private:
      */
     static const uint32_t CANVAS_BUFFER_SIZE = 3600;
     uint8_t canvasBuffer[CANVAS_BUFFER_SIZE];
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<Screen1ViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
 
 };
 

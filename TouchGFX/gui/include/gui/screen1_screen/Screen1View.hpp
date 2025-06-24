@@ -1,6 +1,5 @@
 #ifndef SCREEN1VIEW_HPP
 #define SCREEN1VIEW_HPP
-
 #include <gui_generated/screen1_screen/Screen1ViewBase.hpp>
 #include <gui/screen1_screen/Screen1Presenter.hpp>
 #include <touchgfx/widgets/Widget.hpp>
@@ -19,6 +18,8 @@ public:
     virtual ~Screen1View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    virtual void leftClick();
+    virtual void rightClick();
 
     // Touch handling functions
     virtual void handleClickEvent(const touchgfx::ClickEvent &evt);
@@ -27,8 +28,8 @@ public:
 
 
     void sendMousePosition(int16_t deltaX, int16_t deltaY);
-    void sendMouseClick(bool leftClick);
-
+    void sendMouseClick(int8_t click);
+    void randomizeColor();
 
 protected:
     float smoothedDeltaX = 0.0f;
@@ -36,6 +37,11 @@ protected:
     bool shrinking = false;
     int currentRadius = 35;
     uint32_t shrinkStartTick = 0; //lưu thời điểm có hình tròn
+
+    uint32_t currentColor;                        // Lưu màu hiện tại
+    touchgfx::PainterRGB565 circlePainter;
+
+
 };
 
 #endif // SCREEN1VIEW_HPP

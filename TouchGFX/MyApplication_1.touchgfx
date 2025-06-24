@@ -8,7 +8,7 @@
           {
             "Type": "Circle",
             "Name": "circle1",
-            "Width": 240,
+            "Width": 206,
             "Height": 320,
             "Color": {
               "Red": 255,
@@ -21,9 +21,105 @@
             "LineWidth": 5.0,
             "EndAngle": 360.0,
             "CapPrecision": "Butt"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "leftButton",
+            "X": 206,
+            "Width": 34,
+            "Height": 160,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 34,
+                "Height": 160,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "rightButton",
+            "X": 206,
+            "Y": 160,
+            "Width": 34,
+            "Height": 160,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 34,
+                "Height": 160,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
           }
         ],
-        "Interactions": []
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "leftButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "leftClick"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "rightButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "rightClick"
+            }
+          }
+        ]
       }
     ],
     "CustomContainerDefinitions": [],

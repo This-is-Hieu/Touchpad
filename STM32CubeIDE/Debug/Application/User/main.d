@@ -1,5 +1,5 @@
 Application/User/main.o: \
- D:/Code_nhung/TouchGFXProjects/Touchpad/Core/Src/main.c \
+ D:/BK/20242/Nhúng/TouchGFX/Touchpad/Core/Src/main.c \
  ../../Core/Inc/main.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../../Core/Inc/stm32f4xx_hal_conf.h \
@@ -34,6 +34,7 @@ Application/User/main.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ltdc_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
@@ -54,12 +55,6 @@ Application/User/main.o: \
  ../../TouchGFX/App/app_touchgfx.h ../../USB_DEVICE/App/usb_device.h \
  ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../../USB_DEVICE/Target/usbd_conf.h \
- ../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h \
- ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
- ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
- ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
- ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
  ../../Drivers/BSP/Components/ili9341/ili9341.h \
  ../../Drivers/BSP/Components/ili9341/../Common/lcd.h
 ../../Core/Inc/main.h:
@@ -96,6 +91,7 @@ Application/User/main.o: \
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ltdc_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
@@ -117,11 +113,5 @@ Application/User/main.o: \
 ../../USB_DEVICE/App/usb_device.h:
 ../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
 ../../USB_DEVICE/Target/usbd_conf.h:
-../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h:
-../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
-../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
-../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
-../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
-../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
 ../../Drivers/BSP/Components/ili9341/ili9341.h:
 ../../Drivers/BSP/Components/ili9341/../Common/lcd.h:

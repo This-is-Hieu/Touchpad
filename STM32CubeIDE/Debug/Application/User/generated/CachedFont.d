@@ -1,5 +1,5 @@
 Application/User/generated/CachedFont.o: \
- D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/generated/fonts/src/CachedFont.cpp \
+ D:/BK/20242/Nhúng/TouchGFX/Touchpad/TouchGFX/generated/fonts/src/CachedFont.cpp \
  ../../TouchGFX/generated/fonts/include/fonts/CachedFont.hpp \
  ../../TouchGFX/generated/fonts/include/fonts/FontCache.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Font.hpp \

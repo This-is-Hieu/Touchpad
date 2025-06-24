@@ -5,7 +5,8 @@
 #include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 #include <touchgfx/Color.hpp>
 
-Screen1ViewBase::Screen1ViewBase()
+Screen1ViewBase::Screen1ViewBase() :
+    flexButtonCallback(this, &Screen1ViewBase::flexButtonCallbackHandler)
 {
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
 
@@ -13,7 +14,7 @@ Screen1ViewBase::Screen1ViewBase()
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    circle1.setPosition(0, 0, 240, 320);
+    circle1.setPosition(0, 0, 206, 320);
     circle1.setCenter(40, 40);
     circle1.setRadius(35);
     circle1.setLineWidth(5);
@@ -22,6 +23,20 @@ Screen1ViewBase::Screen1ViewBase()
     circle1Painter.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     circle1.setPainter(circle1Painter);
     add(circle1);
+
+    leftButton.setBoxWithBorderPosition(0, 0, 34, 160);
+    leftButton.setBorderSize(5);
+    leftButton.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    leftButton.setAction(flexButtonCallback);
+    leftButton.setPosition(206, 0, 34, 160);
+    add(leftButton);
+
+    rightButton.setBoxWithBorderPosition(0, 0, 34, 160);
+    rightButton.setBorderSize(5);
+    rightButton.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    rightButton.setAction(flexButtonCallback);
+    rightButton.setPosition(206, 160, 34, 160);
+    add(rightButton);
 }
 
 Screen1ViewBase::~Screen1ViewBase()
@@ -32,4 +47,22 @@ Screen1ViewBase::~Screen1ViewBase()
 void Screen1ViewBase::setupScreen()
 {
 
+}
+
+void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
+{
+    if (&src == &leftButton)
+    {
+        //Interaction1
+        //When leftButton clicked call virtual function
+        //Call leftClick
+        leftClick();
+    }
+    if (&src == &rightButton)
+    {
+        //Interaction2
+        //When rightButton clicked call virtual function
+        //Call rightClick
+        rightClick();
+    }
 }

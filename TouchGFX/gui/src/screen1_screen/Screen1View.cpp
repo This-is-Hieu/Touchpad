@@ -7,9 +7,10 @@
 #include "usbd_hid.h"
 #include "stm32f4xx_hal.h"
 #include <touchgfx/widgets/canvas/Circle.hpp>
-
+#include "stm32f4xx_hal_rng.h"   // Dùng RNG hardware
 #include <touchgfx/widgets/canvas/AbstractPainterARGB8888.hpp>
 
+extern RNG_HandleTypeDef hrng;
 extern USBD_HandleTypeDef hUsbDeviceHS;
 
 // Mouse HID report structure
@@ -46,27 +47,19 @@ void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
     {
         circle1.setCenter(evt.getX(), evt.getY());
         currentRadius = 35;
+        randomizeColor();
         circle1.setRadius(currentRadius);
         circle1.setLineWidth(5);
         circle1.setVisible(true);
         circle1.invalidate();
         shrinkStartTick = HAL_GetTick();
-        shrinking = true;  // Bắt đầu thu nhỏ trong tick
+        shrinking = true;
     }
     else if (evt.getType() == touchgfx::ClickEvent::RELEASED)
     {
-
-
-//        if (!dragging)
-//        {
-//            sendMouseClick(true);
-//            HAL_Delay(20);
-//            sendMouseClick(false);
-//        }
-
-//        dragging = false;
-//        touchStartX = -1;
-//        touchStartY = -1;
+		sendMouseClick(true);
+		HAL_Delay(20);
+		sendMouseClick(false);
     }
 }
 
@@ -75,12 +68,15 @@ int16_t deltaY = 0;
 void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 {
 
-
+	const int DRAG_THRESHOLD = 4;
     deltaX = evt.getDeltaX();
     deltaY = evt.getDeltaY();
     shrinkStartTick = HAL_GetTick();
+    if (abs(deltaX) < DRAG_THRESHOLD && abs(deltaY) < DRAG_THRESHOLD)
+        return;
     circle1.setCenter(evt.getNewX(), evt.getNewY());
     currentRadius = 35;
+    randomizeColor();
     circle1.setRadius(currentRadius);
     circle1.setLineWidth(5);
     circle1.setVisible(true);
@@ -88,9 +84,7 @@ void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 
     shrinking = true;  // Bắt đầu thu nhỏ trong tick
 
-
 }
-
 
 
 void Screen1View::handleTickEvent()
@@ -122,10 +116,39 @@ void Screen1View::handleTickEvent()
         }
     }
 }
+void Screen1View::randomizeColor()
+{
+    uint32_t rnd;
+    HAL_StatusTypeDef status = HAL_RNG_GenerateRandomNumber(&hrng, &rnd);
 
+    if (status == HAL_OK)
+    {
+        uint8_t r = (rnd >> 16) & 0xFF;
+        uint8_t g = (rnd >> 8)  & 0xFF;
+        uint8_t b = rnd & 0xFF;
 
+        currentColor = touchgfx::Color::getColorFromRGB(r, g, b);
+    }
+    else
+    {
+        currentColor = touchgfx::Color::getColorFromRGB(255, 255, 255);
+    }
 
-
+    circlePainter.setColor(currentColor);
+    circle1.setPainter(circlePainter);
+}
+void Screen1View::leftClick()
+{
+    sendMouseClick(1);       // Gửi tín hiệu nhấn chuột trái
+    HAL_Delay(10);
+    sendMouseClick(0);       // Gửi tín hiệu thả chuột
+}
+void Screen1View::rightClick()
+{
+    sendMouseClick(2);       // Gửi tín hiệu nhấn chuột phải
+    HAL_Delay(10);
+    sendMouseClick(0);       // Gửi tín hiệu thả chuột
+}
 void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
 {
     const int DEADZONE = 1;
@@ -164,18 +187,15 @@ void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
     USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
 }
 
-void Screen1View::sendMouseClick(bool leftClick)
+void Screen1View::sendMouseClick(int8_t click)
 {
     mouseHID mouseReport = {0};
 
-    mouseReport.button = leftClick ? 1 : 0;
+    mouseReport.button = click;
     mouseReport.mouse_x = 0;
     mouseReport.mouse_y = 0;
     mouseReport.wheel = 0;
 
-
     USBD_HID_SendReport(&hUsbDeviceHS, (uint8_t *)&mouseReport, sizeof(mouseReport));
 }
-
-
 
