@@ -4,9 +4,9 @@ D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1V
 ../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:19:13:Screen1View::~Screen1View()	1
 ../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:19:13:virtual Screen1View::~Screen1View()	1
 D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:24:1:Screen1View::Screen1View()	1
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:129:6:void Screen1View::sendMousePosition(int16_t, int16_t)	6
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:167:6:void Screen1View::sendMouseClick(bool)	1
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:128:6:void Screen1View::sendMousePosition(int16_t, int16_t)	6
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:166:6:void Screen1View::sendMouseClick(bool)	1
 D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:29:6:virtual void Screen1View::setupScreen()	1
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:75:6:virtual void Screen1View::handleDragEvent(const touchgfx::DragEvent&)	1
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:43:6:virtual void Screen1View::handleClickEvent(const touchgfx::ClickEvent&)	2
-D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:96:6:virtual void Screen1View::handleTickEvent()	4
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:43:6:virtual void Screen1View::handleClickEvent(const touchgfx::ClickEvent&)	4
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:73:6:virtual void Screen1View::handleDragEvent(const touchgfx::DragEvent&)	2
+D:/Code_nhung/TouchGFXProjects/Touchpad/TouchGFX/gui/src/screen1_screen/Screen1View.cpp:95:6:virtual void Screen1View::handleTickEvent()	4

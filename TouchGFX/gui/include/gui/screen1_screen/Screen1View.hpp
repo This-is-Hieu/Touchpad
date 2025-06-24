@@ -36,6 +36,7 @@ protected:
     bool shrinking = false;
     int currentRadius = 35;
     uint32_t shrinkStartTick = 0; //lưu thời điểm có hình tròn
+    bool dragging = false;
 };
 
 #endif // SCREEN1VIEW_HPP

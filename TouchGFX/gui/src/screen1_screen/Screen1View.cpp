@@ -57,16 +57,14 @@ void Screen1View::handleClickEvent(const touchgfx::ClickEvent &evt)
     {
 
 
-//        if (!dragging)
-//        {
-//            sendMouseClick(true);
-//            HAL_Delay(20);
-//            sendMouseClick(false);
-//        }
+        if (!dragging)
+        {
+            sendMouseClick(true);
+            HAL_Delay(20);
+            sendMouseClick(false);
+        }
 
-//        dragging = false;
-//        touchStartX = -1;
-//        touchStartY = -1;
+        dragging = false;
     }
 }
 
@@ -74,7 +72,8 @@ int16_t deltaX = 0;
 int16_t deltaY = 0;
 void Screen1View::handleDragEvent(const touchgfx::DragEvent &evt)
 {
-
+	if(dragging == false)
+		dragging = true;
 
     deltaX = evt.getDeltaX();
     deltaY = evt.getDeltaY();
@@ -141,13 +140,13 @@ void Screen1View::sendMousePosition(int16_t deltaX, int16_t deltaY)
     int16_t adjustedX = deltaY;
     int16_t adjustedY = -deltaX;
 
-    // Apply exponential smoothing để giảm jitter
-            const float smoothingFactor = 0.3f; // 0.0 = no smoothing, 1.0 = maximum smoothing
+
+            const float smoothingFactor = 0.3f;
             smoothedDeltaX = smoothedDeltaX * smoothingFactor + adjustedX * (1.0f - smoothingFactor);
             smoothedDeltaY = smoothedDeltaY * smoothingFactor + adjustedY * (1.0f - smoothingFactor);
 
-            smoothedDeltaX *= 1;
-            smoothedDeltaY *= 1;
+            smoothedDeltaX *= 1.5;
+            smoothedDeltaY *= 1.5;
 
 
     if (smoothedDeltaX > 127) smoothedDeltaX = 127;
